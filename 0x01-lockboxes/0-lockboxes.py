@@ -1,32 +1,35 @@
 #!/usr/bin/python3
-"""Graph data structure traversal"""
+"""
+You have n number of locked boxes in front of you.
+Each box is numbered sequentially from 0 to n - 1
+and each box may contain keys to the other boxes
+More info:
+- Prototype: def canUnlockAll(boxes)
+- boxes is a list of lists
+- A key with the same number as a box opens that box
+- You can assume all keys will be positive integers
+- The first box boxes[0] is unlocked
+- Return True if all boxes can be opened, else return False
+"""
 
 
 def canUnlockAll(boxes):
-    """Check if all boxes can be recursively opened
-    Function, by the help of helper function `recurse`, checks whether all
-    boxes in `boxes` 2D list can be opened by begining with keys found on box
-    at index 0.
-    Args:
-        boxes (list of list): 2D list with elements as boxes containing keys
-    Returns: True if created set has all keys, false otherwise
     """
-    keysSet = {0}
-    recurse(0, boxes, keysSet)
-    return list(keysSet) == list(range(len(boxes)))
-
-
-def recurse(idx, boxes, keysSet):
-    """Recurse through boxes and enumerate a set with found keys
-    Args:
-        idx (number): Position indicator for a box in `boxes`
-        boxes (2D list): Original list of boxes
-        keysSet (set): Data structure for holding unique keys in
-    Returns:
-        None
+    Description:
+    Write a method that determines if all the boxes can be opened
+    Arguments:
+    boxes --> List of Lists, it contains the boxes with keys
+    Reurn boolean
+    Variables:
+    myKeys --> List, Store the number keys to open boxes
+    key --> integer, key of the myKeys
+    boxKey --> iinteger, key inside of an specific box
     """
-    for key in boxes[idx]:
-        if key not in keysSet and key < len(boxes):
-            keysSet.add(key)
-            recurse(key, boxes, keysSet)
-    return None
+    myKeys = [0]
+    for key in myKeys:
+        for boxKey in boxes[key]:
+            if boxKey not in myKeys and boxKey < len(boxes):
+                myKeys.append(boxKey)
+    if len(myKeys) == len(boxes):
+        return True
+    return False
